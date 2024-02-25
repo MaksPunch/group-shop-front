@@ -3,7 +3,7 @@ import Homepage from "./pages/Homepage";
 
 const NotFound = () => {
   return (
-    <div className="not_found">
+    <div className="not_found text-center mt-52">
       <h1 className="display-4">404</h1>
       <p>страница не доступна</p>
     </div>

@@ -22,9 +22,7 @@ export default function LoginModal() {
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    if (password !== passwordConfirm) {
-      return setAlert("Пароли не совпадают");
-    }
+
     axios
       .post("https://q9mthy-3000.csb.app/api/user/login", {
         email,
