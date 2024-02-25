@@ -1,4 +1,30 @@
+import ProductCard from "../components/ProductCard.jsx";
+import tov4 from '../assets/tov4.png';
+import tov5 from '../assets/tov5.png';
+import tov6 from '../assets/tov6.png';
+import tov7 from '../assets/tov7.png';
+import tov8 from '../assets/tov8.png';
+import tov9 from '../assets/tov9.png';
+import tov10 from '../assets/tov10.png';
+import {useEffect, useState} from "react";
+import axios from "axios";
+
 export default function Homepage() {
+  const [tents, setTents] = useState([]);
+  const [catalog, setCatalog] = useState([]);
+
+  useEffect(() => {
+    axios.get('https://q9mthy-3000.csb.app/api/product?limit=3&categoryId=12').then(res => {
+      setTents(res.data.products.rows);
+    }).catch(e => console.log(e.message))
+  }, []);
+
+  useEffect(() => {
+    axios.get('https://q9mthy-3000.csb.app/api/product?limit=4').then(res => {
+      setCatalog(res.data.products.rows);
+    }).catch(e => console.log(e.message))
+  }, []);
+
   return <div className="center">
     <div className='oneScrean'>
       <div className='space-content'>
@@ -50,96 +76,24 @@ export default function Homepage() {
           </div>
 
         </div>
-        <div className="catalog">
-          <div className="down">
-            <div className="tov4"></div>
-            <h1>36 990 рублей</h1>
-            <div>Палатка BASK Bonzer 4 Голубой</div>
-            <div className="button-cart">
-              <div className="cart-img"></div>
-              <div>В корзину</div>
-            </div>
-            <div className="zak">1127 заказов</div>
-          </div>
-          <div className="down">
-            <div className="tov5"></div>
-            <h1>5 390 рублей</h1>
-            <div>Спальный мешок Northland +15</div>
-            <div className="button-cart">
-              <div className="cart-img"></div>
-              <div>В корзину</div>
-            </div>
-            <div className="zak">560 заказов</div>
-          </div>
-          <div className="down">
-            <div className="tov6"></div>
-            <h1>2 490 рублей</h1>
-            <div>Термос SARGE, 1.8 л</div>
-            <div className="button-cart">
-              <div className="cart-img"></div>
-              <div>В корзину</div>
-            </div>
-            <div className="zak">867 заказов</div>
-          </div>
+        <div className="flex gap-10 content-around">
+          {tents.map((product) =>
+            <ProductCard title={product.name} price={product.price} image={"https://q9mthy-3000.csb.app/" + product.img}/>
+          )}
+            {/*<ProductCard title={"Палатка BASK Bonzer 4 Голубой"} price={36990} image={tov4}/>*/}
+            {/*<ProductCard title={"Спальный мешок Northland +15"} price={5390} image={tov5}/>*/}
+            {/*<ProductCard title={"Термос SARGE, 1.8 л"} price={2490} image={tov6}/>*/}
         </div>
       </div>
     </div>
     <div className="fourScrean">
       <div className="BG4">
-        <h1>Успей купить! Товары со скидкой до 70%</h1>
-        <div className="gor">
-          <div className="down">
-            <div className="tov7"></div>
-            <div className="block">
-              <h2>280 рублей</h2>
-              <div className="zak">560 рублей</div>
-              <div>Фонарь налобный COAST</div>
-              <div className="button-cart">
-                <div className="cart-img"></div>
-                <div>В корзину</div>
-              </div>
+        <h1>Успей купить!</h1>
+        <div className="flex gap-12 items-start">
+          {catalog.map((product) =>
+              <ProductCard title={product.name} price={product.price} image={"https://q9mthy-3000.csb.app/" + product.img}/>
+          )}
 
-            </div>
-          </div>
-          <div className="down">
-            <div className="tov8"></div>
-            <div className="block">
-              <h2>1 000 рублей</h2>
-              <div className="zak">2 500 рублей</div>
-              <div>Матрас надувной Intex Роял 191х99х25 см</div>
-              <div className="button-cart">
-                <div className="cart-img"></div>
-                <div>В корзину</div>
-              </div>
-
-            </div>
-          </div>
-          <div className="down">
-            <div className="tov9"></div>
-            <div className="block">
-              <h2>2 968 рублей</h2>
-              <div className="zak">5 600 рублей</div>
-              <div>Бинокль GAUT Vega 16x50, Porro-призмы BK7</div>
-              <div className="button-cart">
-                <div className="cart-img"></div>
-                <div>В корзину</div>
-              </div>
-
-            </div>
-          </div>
-          <div className="down">
-            <div className="tov10"></div>
-            <div className="block">
-              <h2>11 900 рублей</h2>
-              <div className="zak">17 000 рублей</div>
-              <div>Куртка мембранная мужская Northland Berg Dermizax</div>
-              <div className="button-cart">
-                <div className="cart-img"></div>
-                <div>В корзину</div>
-              </div>
-
-            </div>
-          </div>
         </div>
       </div>
     </div>
