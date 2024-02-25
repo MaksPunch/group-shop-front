@@ -9,11 +9,10 @@ import PlusTov from '../components/PlusTov';
 import favorite from '../assets/favorite.png';
 import elka from '../assets/elka.png';
 import ProductCard from '../components/ProductCard.jsx';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import {useState} from 'react';
+import {useEffect} from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
-
+import {useParams} from 'react-router-dom';
 
 
 export default function Tov() {
@@ -28,14 +27,14 @@ export default function Tov() {
     }, []);
 
     const [product, setProduct] = useState([]);
-    const { id } = useParams()
+    const {id} = useParams()
 
 
     useEffect(() => {
         axios.get('https://q9mthy-3000.csb.app/api/product/' + id).then(res => {
             setProduct(res.data.product);
         }).catch(e => console.log(e.message))
-    }, []);
+    }, [id]);
 
     const wordDeclension = (number, titles) => {
         number = Math.abs(number);
@@ -71,7 +70,7 @@ export default function Tov() {
                     <p>Цвет: жёлтый, синий</p>
                     <p>Количество:</p>
                     <div className='gor'>
-                        <PlusTov />
+                        <PlusTov/>
                     </div>
                     <h1>{product.price + " " + wordDeclension(product.price, ["рубль", "рубля", "рублей"])}</h1>
                     <button className="gor-catalog">
@@ -86,7 +85,12 @@ export default function Tov() {
 
         </div>
         <div className='text-tov-center'>
-            <div>Легкая трехместная палатка Marmot — прекрасный вариант для пеших походов. Продуманная конструкция оптимизирует внутреннее пространство, делая его максимально удобным для сна и размещения вещей, не увеличивая размеры и вес палатки. Большая часть внутренней палатки состоит из легкой сетчатой ткани, которая обеспечивает превосходную вентиляцию и снижает вероятность конденсата. Отличный выбор для летних походов в теплом климате.</div>
+            <div>Легкая трехместная палатка Marmot — прекрасный вариант для пеших походов. Продуманная конструкция
+                оптимизирует внутреннее пространство, делая его максимально удобным для сна и размещения вещей, не
+                увеличивая размеры и вес палатки. Большая часть внутренней палатки состоит из легкой сетчатой ткани,
+                которая обеспечивает превосходную вентиляцию и снижает вероятность конденсата. Отличный выбор для летних
+                походов в теплом климате.
+            </div>
             <img src={elka}></img>
         </div>
         <div className="fourScrean">
@@ -94,7 +98,8 @@ export default function Tov() {
                 <h1>Вас может заинтересовать</h1>
                 <div className="flex gap-12 items-start">
                     {catalog.map((product) =>
-                        <ProductCard title={product.name} price={product.price} image={"https://q9mthy-3000.csb.app/" + product.img} />
+                        <ProductCard key={product.id} title={product.name} price={product.price}
+                                     image={"https://q9mthy-3000.csb.app/" + product.img} id={product.id}/>
                     )}
                 </div>
             </div>
