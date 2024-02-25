@@ -1,45 +1,14 @@
+import { useState } from "react";
 import "../index.css"
 export default function PlusTov() {
-    document.querySelectorAll('.count .plus').forEach(item => {
-
-        item.addEventListener('click', function () {
-
-            ++item.parentElement.querySelector('input').value;
-
-            if (item.parentElement.querySelector('input').value > 1) {
-
-                item.parentElement.querySelector('.minus').classList.remove('min');
-
-            }
-
-        });
-
-    });
-
-    document.querySelectorAll('.count .minus').forEach(item => {
-
-        item.addEventListener('click', function () {
-
-            --item.parentElement.querySelector('input').value;
-
-            if (item.parentElement.querySelector('input').value < 2) {
-
-                item.parentElement.querySelector('input').value = 1
-
-                item.classList.add('min');
-
-            }
-
-        });
-
-    });
+const [quantity , setQuantity] = useState(1);
     return <>
         <div className="plusTov">
-            <span class="change minus min">
+            <span className="change minus min cursor-pointer" onClick={() => setQuantity( quantity - 1)}>
                 <span>-</span>
             </span>
-            <input className="input-plus" type="text" name="productСount" value="1" disabled=""></input>
-            <span class="change plus">
+            <input className="input-plus" type="text" name="productСount" value={quantity} disabled="" onChange={(e) => setQuantity(e.target.value)}/>
+            <span className="change plus cursor-pointer" onClick={() => setQuantity( quantity + 1)}>
                 <span>+</span>
             </span>
         </div>
