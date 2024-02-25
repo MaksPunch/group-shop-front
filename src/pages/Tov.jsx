@@ -13,6 +13,7 @@ import {useState} from 'react';
 import {useEffect} from 'react';
 import axios from 'axios';
 import {useParams} from 'react-router-dom';
+import Loading from "../components/Loading.jsx";
 
 
 export default function Tov() {
@@ -45,6 +46,9 @@ export default function Tov() {
         return titles[1];
     }
 
+    if (!product.name) {
+        return <Loading/>
+    }
 
     return <div>
         <div className="catalog-Screan1">
@@ -97,10 +101,10 @@ export default function Tov() {
             <div className="BG5">
                 <h1>Вас может заинтересовать</h1>
                 <div className="flex gap-12 items-start">
-                    {catalog.map((product) =>
+                    {catalog.length ? catalog.map((product) =>
                         <ProductCard key={product.id} title={product.name} price={product.price}
                                      image={"https://q9mthy-3000.csb.app/" + product.img} id={product.id}/>
-                    )}
+                    ) : <Loading/>}
                 </div>
             </div>
         </div>

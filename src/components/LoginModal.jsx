@@ -14,7 +14,8 @@ export default function LoginModal() {
         openLogin: open,
         setOpenLogin: setOpen,
         setOpenRegister,
-        setSuccessAlertText
+        setSuccessAlertText,
+        setToken
     } = useContext(ModalContext);
     const [alert, setAlert] = useState("");
 
@@ -31,6 +32,7 @@ export default function LoginModal() {
             })
             .then((res) => {
                 localStorage.setItem("Token", res.data.token);
+                setToken(res.data.token);
                 setSuccessAlertText("Вы успешно вощли в аккаунт!");
                 setOpen(false);
             })

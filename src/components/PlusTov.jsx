@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "../index.css"
-export default function PlusTov() {
-const [quantity , setQuantity] = useState(1);
+export default function PlusTov({quantityProp}) {
+const [quantity, setQuantity] = useState(quantityProp || 1);
     return <>
         <div className="plusTov">
             <span className="change minus min cursor-pointer" onClick={() => setQuantity( quantity - 1)}>

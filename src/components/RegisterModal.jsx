@@ -15,6 +15,7 @@ export default function RegisterModal() {
     setOpenRegister: setOpen,
     setOpenLogin,
     setSuccessAlertText,
+      setToken
   } = useContext(ModalContext);
   const [alert, setAlert] = useState("");
 
@@ -42,8 +43,8 @@ export default function RegisterModal() {
         password2: passwordConfirm,
       })
       .then((res) => {
-        localStorage.setItem("Token", res.token);
-        axios.defaults.headers.common["Authorization"] = res.token;
+        localStorage.setItem("Token", res.data.token);
+        setToken(res.data.token);
         setSuccessAlertText("Вы успешно зарегистрированы!");
         setOpen(false);
       })

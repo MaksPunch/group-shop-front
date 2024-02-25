@@ -30,7 +30,7 @@ export default function ProductCard({ image, title, price, orders, id }) {
     return (
         <div className="product-card w-44 md:w-80">
             <Link to={'/product/' + id} className="product-card__image flex relative items-start justify-center w-full h-44 md:h-80 bg-neutral-300">
-                <img src={image} className="align-center smd:w-80" alt="Изображение товара" />
+                <img src={image} className="align-center my-auto smd:w-80" alt="Изображение товара" />
                 <button className="product-card__favorite-btn" type="button">
                     <img src={Favorite} className="w-6 md:w-10 absolute right-2.5 top-2.5" alt={"Добавить в избранное"} />
                 </button>
