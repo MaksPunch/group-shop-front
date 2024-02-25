@@ -30,8 +30,7 @@ export default function LoginModal() {
                 password,
             })
             .then((res) => {
-                localStorage.setItem("Token", res.token);
-                axios.defaults.headers.common["Authorization"] = res.token;
+                localStorage.setItem("Token", res.data.token);
                 setSuccessAlertText("Вы успешно вощли в аккаунт!");
                 setOpen(false);
             })

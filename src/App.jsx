@@ -8,6 +8,7 @@ import RegisterModal from "./components/RegisterModal";
 import LoginModal from "./components/LoginModal";
 import SuccessAlert from "./components/SuccessAlert";
 import Footer from "./components/Footer.jsx";
+import axios from "axios";
 
 export const ModalContext = createContext(null);
 
@@ -16,6 +17,9 @@ function App() {
     const [openLogin, setOpenLogin] = useState(false);
     const [successAlertText, setSuccessAlertText] = useState("");
     const [token, setToken] = useState(localStorage.getItem("Token") || "");
+    if (localStorage.getItem('Token')) {
+        axios.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem('Token');
+    }
     return (
         <ModalContext.Provider
             value={{

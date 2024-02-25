@@ -1,13 +1,7 @@
 import ProductCard from "../components/ProductCard.jsx";
-import tov4 from '../assets/tov4.png';
-import tov5 from '../assets/tov5.png';
-import tov6 from '../assets/tov6.png';
-import tov7 from '../assets/tov7.png';
-import tov8 from '../assets/tov8.png';
-import tov9 from '../assets/tov9.png';
-import tov10 from '../assets/tov10.png';
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 export default function Homepage() {
   const [tents, setTents] = useState([]);
@@ -32,7 +26,7 @@ export default function Homepage() {
           <h1>Куда бы вы ни отправились, у вас <br></br>будет все необходимое.</h1>
           <h2>Подготовьтесь к новым приключениям прямо сейчас.</h2>
         </div>
-        <a href='./pages/catalog.jsx' className='button-catalog'>ПЕРЕЙТИ В КАТАЛОГ</a>
+        <Link to='/catalog' className='button-catalog'>ПЕРЕЙТИ В КАТАЛОГ</Link>
       </div>
     </div>
     <div className='twoScrean'>
@@ -78,11 +72,8 @@ export default function Homepage() {
         </div>
         <div className="flex gap-10 content-around">
           {tents.map((product) =>
-            <ProductCard title={product.name} price={product.price} image={"https://q9mthy-3000.csb.app/" + product.img}/>
+            <ProductCard key={product.id} title={product.name} price={product.price} image={"https://q9mthy-3000.csb.app/" + product.img} id={product.id}/>
           )}
-            {/*<ProductCard title={"Палатка BASK Bonzer 4 Голубой"} price={36990} image={tov4}/>*/}
-            {/*<ProductCard title={"Спальный мешок Northland +15"} price={5390} image={tov5}/>*/}
-            {/*<ProductCard title={"Термос SARGE, 1.8 л"} price={2490} image={tov6}/>*/}
         </div>
       </div>
     </div>
@@ -91,9 +82,8 @@ export default function Homepage() {
         <h1>Успей купить!</h1>
         <div className="flex gap-12 items-start">
           {catalog.map((product) =>
-              <ProductCard title={product.name} price={product.price} image={"https://q9mthy-3000.csb.app/" + product.img}/>
+              <ProductCard key={product.id} title={product.name} price={product.price} image={"https://q9mthy-3000.csb.app/" + product.img} id={product.id}/>
           )}
-
         </div>
       </div>
     </div>

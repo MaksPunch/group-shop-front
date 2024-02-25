@@ -8,7 +8,7 @@ export default function SuccessAlert() {
     return "";
   }
   return (
-    <div className="rounded-md w-64 bg-green-50 p-4 absolute top-5 right-5">
+    <div className="rounded-md w-64 bg-green-50 p-4 fixed top-5 right-5 z-10">
       <div className="flex">
         <div className="flex-shrink-0">
           <CheckCircleIcon

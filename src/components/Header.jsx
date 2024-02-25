@@ -17,7 +17,7 @@ export default function Header() {
   }
 
   return (
-      <div className="fixed top-0 flex flex-col gap-5 w-full">
+      <div className="fixed top-0 flex flex-col gap-5 w-full z-10">
         <header className="flex justify-around items-center">
           <div className="bg-neutral-300 opacity-50 rounded-b-full absolute w-full h-20"></div>
           <div className="flex justify-around items-center relative z-10 w-full">
@@ -25,7 +25,7 @@ export default function Header() {
             <nav className="header-nav">
               <ul className="flex xl:gap-11 lg:gap-4">
                 <li>
-                  <Link to="../pages/catalog.jsx" className="flex gap-1">
+                  <Link to="catalog" className="flex gap-1">
                     <img src={catalog} alt="картинка"/>
                     Каталог
                   </Link>
@@ -37,7 +37,7 @@ export default function Header() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="../pages/cart.jsx" className="flex gap-1">
+                  <Link to="cart" className="flex gap-1">
                     <img src={cart} alt="картинка"/>
                     Корзина
                   </Link>
