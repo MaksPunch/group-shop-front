@@ -170,7 +170,7 @@ export default function RegisterModal() {
                       required={true}
                     />
                     <input
-                      className="bg-blue-950 text-white rounded-3xl text-3xl h-16 shadow-xl"
+                      className="bg-blue-950 text-white rounded-3xl text-3xl h-16 shadow-xl cursor-pointer"
                       type="submit"
                       value="Зарегистрироваться"
                     />

@@ -9,7 +9,13 @@ import contacts from "../assets/contacts.png";
 import Search from "./Search.jsx";
 
 export default function Header() {
-  const { setOpenRegister, token, setOpenLogin } = useContext(ModalContext);
+  const { setOpenRegister, token, setOpenLogin, setToken } = useContext(ModalContext);
+
+  function handleLogout() {
+    setToken('');
+    localStorage.removeItem('Token');
+  }
+
   return (
       <div className="fixed top-0 flex flex-col gap-5 w-full">
         <header className="flex justify-around items-center">
@@ -51,7 +57,10 @@ export default function Header() {
                   <p className="cursor-pointer" onClick={() => setOpenLogin(true)}>Вход</p>
                 </div>
             ) : (
-                <Link to="/profile">Личный кабинет</Link>
+                <div className="flex gap-3">
+                  <Link to="/profile">Личный кабинет</Link>
+                  <p className="cursor-pointer" onClick={() => handleLogout()}>Выход</p>
+                </div>
             )}
           </div>
         </header>

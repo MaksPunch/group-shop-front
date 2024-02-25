@@ -3,7 +3,7 @@ import { ModalContext } from "../App";
 import { useContext } from "react";
 
 export default function SuccessAlert() {
-  const { successAlertText } = useContext(ModalContext);
+  const { successAlertText, setSuccessAlertText } = useContext(ModalContext);
   if (!successAlertText) {
     return "";
   }
@@ -26,6 +26,7 @@ export default function SuccessAlert() {
             <button
               type="button"
               className="inline-flex rounded-md bg-green-50 p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:ring-2 focus:ring-green-600 focus:ring-offset-2 focus:ring-offset-green-50"
+              onClick={() => setSuccessAlertText('')}
             >
               <span className="sr-only">Закрыть</span>
               <XMarkIcon className="h-5 w-5" aria-hidden="true" />

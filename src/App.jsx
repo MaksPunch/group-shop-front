@@ -16,7 +16,6 @@ function App() {
     const [openLogin, setOpenLogin] = useState(false);
     const [successAlertText, setSuccessAlertText] = useState("");
     const [token, setToken] = useState(localStorage.getItem("Token") || "");
-    console.log(token)
     return (
         <ModalContext.Provider
             value={{
