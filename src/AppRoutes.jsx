@@ -1,7 +1,7 @@
 import { useRoutes } from "react-router-dom";
 import Homepage from "./pages/Homepage";
-import Catalog from "./pages/Catalog";
 import Cart from "./pages/Cart.jsx";
+import Tov from "./pages/Tov";
 
 const NotFound = () => {
   return (
@@ -19,8 +19,8 @@ export default function AppRoutes() {
       element: <Homepage />,
     },
     {
-      path: "/catalog",
-      element: <Catalog />,
+      path: "/tov/:id",
+      element: <Tov />,
     },
     {
       path: "/cart",

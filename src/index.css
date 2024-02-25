@@ -607,4 +607,30 @@ h2{
 .count .minus.min {
   background-color: #989797;
 }
+
+.text-tov-center{
+  font-family: "UbuntuRegular";
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 120px;
+  font-size: 24px;
+}
+
+.BG5{
+  background-image: url(./assets/BG3.png);
+  background-size: cover;
+  margin-top: 100px;
+  width: 1920px;
+  height: 770px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  font-family: "UbuntuMedium";
+  color: #000;
+}
+
 /* Конец */
