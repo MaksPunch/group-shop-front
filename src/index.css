@@ -574,13 +574,6 @@ h2{
   align-items: center;
 }
 
-.input-plus{
-  width:40px ;
-  display: flex;
-  justify-content: center;
-  padding: 0 14px;
-}
-
 .count .change {
   display: flex;
   justify-content: center;
@@ -611,9 +604,6 @@ h2{
 .text-tov-center{
   font-family: "UbuntuRegular";
   margin-top: 100px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   padding: 0 120px;
   font-size: 24px;
 }

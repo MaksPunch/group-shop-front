@@ -6,17 +6,21 @@ import Loading from "../components/Loading.jsx";
 
 export default function Homepage() {
   const [tents, setTents] = useState([]);
+  const [tentsLoading, setTentsLoading] = useState(true);
   const [catalog, setCatalog] = useState([]);
+  const [catalogLoading, setCatalogLoading] = useState(true);
 
   useEffect(() => {
     axios.get('https://q9mthy-3000.csb.app/api/product?limit=3&categoryId=12').then(res => {
       setTents(res.data.products.rows);
+      setTentsLoading(false)
     }).catch(e => console.log(e.message))
   }, []);
 
   useEffect(() => {
     axios.get('https://q9mthy-3000.csb.app/api/product?limit=4').then(res => {
       setCatalog(res.data.products.rows);
+      setCatalogLoading(false)
     }).catch(e => console.log(e.message))
   }, []);
 
@@ -72,7 +76,7 @@ export default function Homepage() {
 
         </div>
         <div className="flex gap-10 content-around">
-          {tents.length ? tents.map((product) =>
+          {!tentsLoading ? tents.map((product) =>
             <ProductCard key={product.id} title={product.name} price={product.price} image={"https://q9mthy-3000.csb.app/" + product.img} id={product.id}/>
           ) : <Loading/>}
         </div>
@@ -82,7 +86,7 @@ export default function Homepage() {
       <div className="BG4">
         <h1>Успей купить!</h1>
         <div className="flex gap-12 items-start">
-          {catalog.length ? catalog.map((product) =>
+          {!catalogLoading ? catalog.map((product) =>
               <ProductCard key={product.id} title={product.name} price={product.price} image={"https://q9mthy-3000.csb.app/" + product.img} id={product.id}/>
           ) : <Loading/>}
         </div>
