@@ -23,7 +23,7 @@ export default function Tov() {
     const [product, setProduct] = useState([]);
     const [productLoading, setProductLoading] = useState(true);
     const [quantity, setQuantity] = useState(1);
-    const {setSuccessAlertText} = useContext(ModalContext)
+    const {setSuccessAlertText, setErrorAlertText} = useContext(ModalContext)
 
     useEffect(() => {
         axios.get('https://q9mthy-3000.csb.app/api/product?limit=4').then(res => {
@@ -56,7 +56,11 @@ export default function Tov() {
             quantity, productId
         }).then(res => {
             setSuccessAlertText('Товары успешно добавлен в корзину, количество: ' + quantity);
-        }).catch(e => console.log(e.message))
+        }).catch(e => {
+            if (e.response.status === 401) {
+                setErrorAlertText('Вы не авторизованы')
+            }
+        })
     }
 
     return <div>
@@ -86,13 +90,13 @@ export default function Tov() {
                         <PlusTov quantity={quantity} setQuantity={setQuantity}/>
                     </div>
                     <h1>{product.price + " " + wordDeclension(product.price, ["рубль", "рубля", "рублей"])}</h1>
-                    <button className="gor-catalog">
+                    <div className="gor-catalog">
                         <button onClick={() => handleAddToBasket(quantity, product.id)} className="button-cart">
                             <div className="cart-img"></div>
                             <div>В корзину</div>
                         </button>
                         <img src={favorite} alt="Добавить в избранное"></img>
-                    </button>
+                    </div>
                 </div>
             </div>
 
@@ -109,7 +113,7 @@ export default function Tov() {
                 <div className="flex gap-12 items-start">
                     {catalog.length ? catalog.map((product) =>
                         <ProductCard key={product.id} title={product.name} price={product.price}
-                                     image={"https://q9mthy-3000.csb.app/" + product.img} id={product.id}/>
+                                     image={product.img} id={product.id}/>
                     ) : <Loading/>}
                 </div>
             </div>

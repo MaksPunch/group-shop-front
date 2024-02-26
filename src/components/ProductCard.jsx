@@ -32,7 +32,7 @@ export default function ProductCard({ image, title, price, orders, id }) {
             <Link to={'/product/' + id} className="product-card__image flex relative items-start justify-center w-full h-44 md:h-80 bg-neutral-300">
                 <img src={"https://q9mthy-3000.csb.app/" + image} className="align-center my-auto smd:w-80" alt="Изображение товара" />
                 <button className="product-card__favorite-btn" type="button">
-                    <img src={Favorite} className="w-6 md:w-10 absolute right-2.5 top-2.5" alt={"Добавить в избранное"} />
+                    <img src={Favorite} className="max-w-6 max-h-10 md:w-10 absolute right-2.5 top-2.5" alt={"Добавить в избранное"} />
                 </button>
             </Link>
             <div className="product-card-description px-3 flex flex-col p-3 md:p-5 bg-white text-black">

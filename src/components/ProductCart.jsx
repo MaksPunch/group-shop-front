@@ -26,9 +26,9 @@ export default function ProductCart({id, img, price, name, productId, quantityPr
         }
     }, [quantity]);
 
-    return <div className="flex flex-col gap-6">
-        <div className="relative w-full bg-[#D9D9D9] py-4">
-            <img className="mx-auto" src={img} alt={name}/>
+    return <div className="flex flex-col gap-6 min-w-96">
+        <div className="relative w-full bg-[#D9D9D9] py-4 min-h-72">
+            <img className="mx-auto" src={"https://q9mthy-3000.csb.app/" + img} alt={name}/>
             <button className="absolute top-6 left-6" onClick={() => handleDeleteFromBasket()}><img src={trashIcon} alt="Удалить из корзины"/></button>
             <img src={favorite} alt="Добавить в избранную" className="absolute top-6 right-6"/>
         </div>

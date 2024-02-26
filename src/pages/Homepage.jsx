@@ -77,7 +77,7 @@ export default function Homepage() {
         </div>
         <div className="flex gap-10 content-around">
           {!tentsLoading ? tents.map((product) =>
-            <ProductCard key={product.id} title={product.name} price={product.price} image={"https://q9mthy-3000.csb.app/" + product.img} id={product.id}/>
+            <ProductCard key={product.id} title={product.name} price={product.price} image={product.img} id={product.id}/>
           ) : <Loading/>}
         </div>
       </div>
@@ -87,7 +87,7 @@ export default function Homepage() {
         <h1>Успей купить!</h1>
         <div className="flex gap-12 items-start">
           {!catalogLoading ? catalog.map((product) =>
-              <ProductCard key={product.id} title={product.name} price={product.price} image={"https://q9mthy-3000.csb.app/" + product.img} id={product.id}/>
+              <ProductCard key={product.id} title={product.name} price={product.price} image={product.img} id={product.id}/>
           ) : <Loading/>}
         </div>
       </div>

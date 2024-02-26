@@ -113,7 +113,7 @@ const Cart = () => {
                             key={product.id}
                             id={product.id}
                             price={product.product.price + " " + wordDeclension(product.product.price, ["рубль", "рубля", "рублей"])}
-                            img={"https://q9mthy-3000.csb.app/" + product.product.img}
+                            img={product.product.img}
                             name={product.product.name}
                             productId={product.product.id}
                             quantityProp={product.quantity}

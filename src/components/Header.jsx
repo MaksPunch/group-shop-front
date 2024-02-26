@@ -9,7 +9,7 @@ import contacts from "../assets/contacts.png";
 import Search from "./Search.jsx";
 
 export default function Header() {
-  const { setOpenRegister, token, setOpenLogin, setToken } = useContext(ModalContext);
+  const { setOpenRegister, token, setOpenLogin, setToken, setOpenAddProduct } = useContext(ModalContext);
 
   function handleLogout() {
     setToken('');
@@ -30,12 +30,12 @@ export default function Header() {
                     Каталог
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link to="#" className="flex gap-1">
                     <img src={sales} alt="картинка"/>
                     Скидки
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <Link to="cart" className="flex gap-1">
                     <img src={cart} alt="картинка"/>
@@ -43,21 +43,18 @@ export default function Header() {
                   </Link>
                 </li>
                 <li>
-                  <Link to="#" className="flex gap-1">
-                    <img src={contacts} alt="картинка"/>
-                    Контакты
-                  </Link>
+                  <p className="cursor-pointer" onClick={() => setOpenAddProduct(true)}>Добавить товар</p>
                 </li>
               </ul>
             </nav>
             <Search/>
             {token === '' ? (
-                <div className="flex gap-3">
+                <div className="flex gap-3 text-xl">
                   <p className="cursor-pointer" onClick={() => setOpenRegister(true)}>Регистрация</p>
                   <p className="cursor-pointer" onClick={() => setOpenLogin(true)}>Вход</p>
                 </div>
             ) : (
-                <div className="flex gap-3">
+                <div className="flex gap-3 text-xl">
                   <Link to="/profile">Личный кабинет</Link>
                   <p className="cursor-pointer" onClick={() => handleLogout()}>Выход</p>
                 </div>
