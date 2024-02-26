@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react'
 import ProductCard from '../components/ProductCard'
 import NavBg from './../assets/catalog_nav-bg.png'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
 import Loading from '../components/Loading'
+import Sort from "../assets/sort.png"
 
 export default function Catalog() {
 
@@ -11,17 +11,24 @@ export default function Catalog() {
     const [allProucts, setAllProducts] = useState([])
     const [brandChecked, setBrandChecked] = useState(false)
     const [loading, setLoading] = useState(true)
+    const [selected, setSelected] = useState("DEFAULT")
 
 
-    const productsList = products.map((product) => {
-        return (
-            <ProductCard image={"/" + product.img}
-                         title={product.name}
-                         price={product.price}
-                         id={product.id}
-                         key={product.id} />
-        )
-    })  
+    const ProductsList = function() {
+        if(!products) {
+            return
+        }
+        
+        return products.map((product) => {
+            return (
+                <ProductCard image={"/" + product.img}
+                             title={product.name}
+                             price={product.price}
+                             id={product.id}
+                             key={product.id} />
+            )
+        })
+    }
 
     let category = ""
 
@@ -33,6 +40,9 @@ export default function Catalog() {
             if(category == 1) {
                 setProducts(allProucts);
                 return
+            } else if(!category) {
+                setProducts([])
+                return;
             }
             
         }
@@ -43,9 +53,7 @@ export default function Catalog() {
                 brandId: e.target.value ?? "",
                 categoryId: category ?? ""
 
-            }, })
-            
-            .then(res => {
+            }, }).then(res => {
             setProducts(res.data.products.rows)
         })} else {
             setProducts(allProucts)
@@ -62,11 +70,61 @@ export default function Catalog() {
         })
     }, [])
 
+
+    const sortFromLowToHigh = function(data) {
+        return data.sort((a, b) => {
+            return b.price - a.price;
+        })
+    }
+
+    const sortFromHighToLow = function(data) {
+        return data.sort((a, b) => {
+            return a.price - b.price;
+        })
+    }
+
+    const sortByLetter = function(data) {
+        return data.sort((a, b) => {
+            if (a.desciption > b.description) {
+                return 1;
+            }
+            if (a.description < b.description) {
+                return -1;
+            }
+            return 0;
+        })
+    }
+
+    const handleSort = function (e) {
+        setSelected(e.target.value)
+        
+        const sortType = e.target.value;
+
+        if(sortType === "price_to_high") {
+            return setProducts((prev) => sortFromLowToHigh(prev))
+        } else if (sortType === "price_to_low") {
+            return setProducts((prev) => sortFromHighToLow(prev))
+        } else if (sortType === "price_to_title") {
+            return setProducts((prev) => sortByLetter(prev))
+        }
+    }
+
     return (
         <section className="cataloge mt-48 flex flex-col !g-0">
             <h1 className="page__title font-[UbuntuMedium] text-5xl text-center">КАТАЛОГ ТОВАРОВ</h1>
             <div className="w-full mt-24">
                 <h2 className="font-[UbuntuMedium] text-3xl text-start ml-24">Туристическое снаряжение</h2>
+                <div className="flex justify-end">
+                    <img src={Sort} />
+                    <select type="button" value={selected} className="text-xl flex mr-24" onChange={(e) => handleSort(e)}>
+                        <option value="DEFAULT" className="" disabled>
+                            Сортировать
+                        </option>
+                        <option value="price_to_high">По убыванию цены</option>
+                        <option value="price_to_low">По возрастанию цены</option>
+                        <option value="price_to_title">По названию</option>
+                    </select>
+                </div>
             </div>
             <div className="flex justify-start gap-24 w-full mt-12">
                 <div className={(loading ? "mr-72 " : " ") + "side-nav"}>
@@ -142,8 +200,8 @@ export default function Catalog() {
                         </li>
                     </ul>
                     <form action="" className='flex flex-col ml-7 mt-7'>
-                        <label htmlFor="price-range" className='font-[UbuntuMedium] text-2xl'>Цена</label>
-                        <input type='range' id='price-range' className='mt-7' min={50} max={299990}/>
+                        {/*<label htmlFor="price-range" className='font-[UbuntuMedium] text-2xl'>Цена</label>
+                        <input type='range' id='price-range' className='mt-7' min={50} max={299990}/>*/}
                         <fieldset className='mt-6 flex flex-col gap-3' onChange={(e) => handleFilter(e)}>
                             <legend className='font-semibold text-2xl mb-6'>Бренд</legend>
                             <label className='text-xl'>
@@ -166,14 +224,14 @@ export default function Catalog() {
                                 <input type='radio' className='mr-2' value={6} name="brand" />
                                 SARGE
                             </label>
-                            <button type='button' className='self-start show-more text-xl'>Посмотреть все</button>
                         </fieldset>
                     </form>
                 </div>
-                {loading ? <Loading /> : <section className="products grid grid-cols-3 gap-x-10">
+                {loading ? <Loading /> : <section className={(products.length >= 1 ? "grid-cols-3 " : "") + "products grid justify-self-center gap-x-10 mx-auto"}>
                 {
-                    productsList
+                    <ProductsList />
                 }
+                {products.length === 0 && <h2 className="text-center mx-auto w-full">Товары по этой категории отсутсвуют</h2>}
                 </section>}
             </div>
         </section>
