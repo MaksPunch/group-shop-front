@@ -30,7 +30,7 @@ export default function ProductCard({ image, title, price, orders, id }) {
     return (
         <div className="product-card w-44 md:w-80">
             <Link to={'/product/' + id} className="product-card__image flex relative items-start justify-center w-full h-44 md:h-80 bg-neutral-300">
-                <img src={image} className="align-center my-auto smd:w-80" alt="Изображение товара" />
+                <img src={"https://q9mthy-3000.csb.app/" + image} className="align-center my-auto smd:w-80" alt="Изображение товара" />
                 <button className="product-card__favorite-btn" type="button">
                     <img src={Favorite} className="w-6 md:w-10 absolute right-2.5 top-2.5" alt={"Добавить в избранное"} />
                 </button>
@@ -39,7 +39,7 @@ export default function ProductCard({ image, title, price, orders, id }) {
                 <span className="product-card__product-price text-lg font-medium md:text-3xl">
                     {price + " " + wordDeclension(price, ["рубль", "рубля", "рублей"])}
                 </span>
-                <Link to={'/product/' + id} className="product-card__product-title text-xs font-[UbuntuMedium] mt-3 md:mt-6 md:text-lg md:leading-none">
+                <Link to={'/product/' + id} className="product-card__product-title text-xs font-[UbuntuMedium] h-10 mt-3 md:mt-6 md:text-lg md:leading-none">
                     {title}
                 </Link>
                 <button className="product-card__cart-button flex items-center gap-1 md:gap-3 border-2 border-black rounded-md py-0.5 px-2 w-fit mt-2 md:mt-3"
