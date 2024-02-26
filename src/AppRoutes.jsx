@@ -3,6 +3,7 @@ import Homepage from "./pages/Homepage";
 import Cart from "./pages/Cart.jsx";
 import Tov from "./pages/Tov";
 import NotAuthorized from "./pages/NotAuthorized.jsx";
+import Catalog from "./pages/Catalog.jsx";
 
 const NotFound = () => {
     return (
@@ -26,6 +27,10 @@ export default function AppRoutes() {
         {
             path: "/cart",
             element: <Cart/>,
+        },
+        {
+            path: "/catalog",
+            element: <Catalog />
         },
         {
             path: "/not_authorized",
